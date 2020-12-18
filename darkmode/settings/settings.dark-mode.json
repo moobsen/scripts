@@ -1,0 +1,7 @@
+{
+    "editor.minimap.enabled": false,
+    "workbench.iconTheme": "material-icon-theme",
+    "diffEditor.maxComputationTime": 0,
+    "workbench.preferredLightColorTheme": "Solarized Light",
+    "workbench.colorTheme": "Solarized Dark"
+}
