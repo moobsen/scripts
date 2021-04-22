@@ -1,21 +1,30 @@
 #!/bin/bash
 
-DARK_MODE=`cat ~/.config/moobsen/dark_mode`
-BASEDIR=$(dirname "$0") #directory in which the script resides
-#echo Dark mode was: $DARK_MODE
+# run from git root
+cd $(git rev-parse --show-toplevel)
 
-if [ "$DARK_MODE" = false ]
+DARK_MODE_STATUS=$HOME/.config/dark_mode_status
+VS_CODE_CONFIG=$HOME/.config/Code/User/settings.json
+CODIUM_CONFIG=$HOME/.config/VSCodium/User/settings.json
+
+cat $DARK_MODE_STATUS
+if [ `cat $DARK_MODE_STATUS` = false ]
 then
     #echo 'Turned on dark mode.'
-    cp $BASEDIR/settings/terminalrc.solarized-dark ~/.config/xfce4/terminal/terminalrc
-    cp $BASEDIR/settings/settings.dark-mode.json ~/.config/Code/User/settings.json
-    cp $BASEDIR/img/bg_dark.png ~/Pictures/bg.png
-    echo true > ~/.config/moobsen/dark_mode
+    # terminal color
+    cp ./darkmode/settings/terminalrc.solarized-dark $HOME/.config/xfce4/terminal/terminalrc
+    # vscode color
+    jq '."workbench.colorTheme" |= "Solarized Dark"' $VS_CODE_CONFIG > settings.tmp && mv settings.tmp $VS_CODE_CONFIG
+    jq '."workbench.colorTheme" |= "Solarized Dark"' $CODIUM_CONFIG > settings.tmp && mv settings.tmp $CODIUM_CONFIG
+    # change desktop backgroud
+    cp ./darkmode/img/bg_dark.png $HOME/Pictures/bg.png
+    echo true > $DARK_MODE_STATUS
 else
     #echo 'Turned off dark mode.'
-    cp $BASEDIR/settings/terminalrc.solarized-light ~/.config/xfce4/terminal/terminalrc
-    cp $BASEDIR/settings/settings.light-mode.json ~/.config/Code/User/settings.json
-    cp $BASEDIR/img/bg_light.png ~/Pictures/bg.png
-    echo false > ~/.config/moobsen/dark_mode
+    cp ./darkmode/settings/terminalrc.solarized-light $HOME/.config/xfce4/terminal/terminalrc
+    jq '."workbench.colorTheme" |= "Solarized Light"' $VS_CODE_CONFIG > settings.tmp && mv settings.tmp $VS_CODE_CONFIG
+    jq '."workbench.colorTheme" |= "Solarized Light"' $CODIUM_CONFIG > settings.tmp && mv settings.tmp $CODIUM_CONFIG
+    cp ./darkmode/img/bg_light.png $HOME/Pictures/bg.png
+    echo false > $DARK_MODE_STATUS
 fi
 
