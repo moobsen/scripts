@@ -1,13 +1,15 @@
 #!/bin/bash
 
-# run from git root
+# go to folder in which the script resides
+cd $(dirname "$0")
+# run in git root folder
 cd $(git rev-parse --show-toplevel)
 
 DARK_MODE_STATUS=$HOME/.config/dark_mode_status
 VS_CODE_CONFIG=$HOME/.config/Code/User/settings.json
 CODIUM_CONFIG=$HOME/.config/VSCodium/User/settings.json
 
-cat $DARK_MODE_STATUS
+pwd > $HOME/pwd.tmp
 if [ `cat $DARK_MODE_STATUS` = false ]
 then
     #echo 'Turned on dark mode.'
