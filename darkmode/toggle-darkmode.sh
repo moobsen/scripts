@@ -19,6 +19,8 @@ then
     jq '."workbench.colorTheme" |= "Solarized Dark"' $CODIUM_CONFIG > settings.tmp && mv settings.tmp $CODIUM_CONFIG
     # change desktop backgroud
     cp ./darkmode/img/bg_dark.png $HOME/Pictures/bg.png
+    # set background brightness to 0%
+    sudo brightnessctl s 0%
     echo true > $DARK_MODE_STATUS
 else
     #echo 'Turned off dark mode.'
@@ -26,6 +28,7 @@ else
     jq '."workbench.colorTheme" |= "Solarized Light"' $VS_CODE_CONFIG > settings.tmp && mv settings.tmp $VS_CODE_CONFIG
     jq '."workbench.colorTheme" |= "Solarized Light"' $CODIUM_CONFIG > settings.tmp && mv settings.tmp $CODIUM_CONFIG
     cp ./darkmode/img/bg_light.png $HOME/Pictures/bg.png
+    sudo brightnessctl s 100%
     echo false > $DARK_MODE_STATUS
 fi
 
