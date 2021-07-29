@@ -1,3 +1,8 @@
+### let xrandr find and activate all attached screens
+```
+xrandr --auto
+```
+
 ### rotate screen
 ```
 xrandr --output LVDS1 --rotate left
