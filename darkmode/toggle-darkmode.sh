@@ -20,7 +20,8 @@ then
     # change desktop backgroud
     cp ./darkmode/img/bg_dark.png $HOME/Pictures/bg.png
     # set background brightness to 0%
-    sudo brightnessctl s 0%
+    sudo brightnessctl s 20%
+    gsettings set org.gnome.desktop.interface color-scheme prefer-dark
     echo true > $DARK_MODE_STATUS
 else
     #echo 'Turned off dark mode.'
@@ -29,6 +30,7 @@ else
     jq '."workbench.colorTheme" |= "Solarized Light"' $CODIUM_CONFIG > settings.tmp && mv settings.tmp $CODIUM_CONFIG
     cp ./darkmode/img/bg_light.png $HOME/Pictures/bg.png
     sudo brightnessctl s 100%
+    gsettings set org.gnome.desktop.interface color-scheme prefer-light
     echo false > $DARK_MODE_STATUS
 fi
 
