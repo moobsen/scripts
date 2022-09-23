@@ -13,4 +13,4 @@ R_HEX=$(printf '%X' $R)
 G_HEX=$(printf '%X' $G)
 B_HEX=$(printf '%X' $B)
 
-sudo ./set-color.sh 0x$R_HEX$G_HEX$B_HEX
+sudo ./set-keyboard-color.sh 0x$R_HEX$G_HEX$B_HEX
