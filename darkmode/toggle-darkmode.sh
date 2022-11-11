@@ -17,7 +17,7 @@ then
     # vscode color
     jq '."workbench.colorTheme" |= "Solarized Dark"' $CODIUM_CONFIG > settings.tmp && mv settings.tmp $CODIUM_CONFIG
     # change desktop backgroud
-    cp ./darkmode/img/bg_dark.png $HOME/Pictures/bg.png
+    feh --bg-center ./darkmode/img/bg_dark.png --image-bg black
     # set background brightness to 0%
     sudo brightnessctl s 20%
     gsettings set org.gnome.desktop.interface color-scheme prefer-dark
@@ -26,7 +26,7 @@ else
     #echo 'Turned off dark mode.'
     cp ./darkmode/settings/terminalrc.solarized-light $HOME/.config/xfce4/terminal/terminalrc
     jq '."workbench.colorTheme" |= "Solarized Light"' $CODIUM_CONFIG > settings.tmp && mv settings.tmp $CODIUM_CONFIG
-    cp ./darkmode/img/bg_light.png $HOME/Pictures/bg.png
+    feh --bg-center ./darkmode/img/bg_light.png --image-bg white
     sudo brightnessctl s 100%
     gsettings set org.gnome.desktop.interface color-scheme prefer-light
     echo false > $DARK_MODE_STATUS
