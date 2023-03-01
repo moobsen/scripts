@@ -1,6 +1,6 @@
 #!/bin/bash
 
-MIDDLE="DP-2-1-8"
+MIDDLE="DP-2-2-8"
 RIGHT_ROTATED="DP-2-2-1"
 
 xrandr --auto
