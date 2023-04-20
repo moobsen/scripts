@@ -5,7 +5,7 @@ TOP="HDMI-2"
 xrandr --auto
 xrandr --output $LEFT_ROTATED --rotate left
 xrandr --output $TOP --above eDP-1
-xrandr --output $LEFT_ROTATED --left-of DP-1
+xrandr --output $LEFT_ROTATED --left-of $TOP
 xrandr --output $TOP --primary
 i3-msg 'rename workspace 2 to 4'
 i3-msg 'rename workspace 3 to 2'
