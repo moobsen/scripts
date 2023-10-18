@@ -1,4 +1,2 @@
-# e.g.>  ./set-color.sh 0xFF0000 to set keyboard to red
-# 0xRRGGBB
 #!/bin/bash
-echo -n $1 > /sys/devices/platform/tuxedo_keyboard/color_left
+echo $1 $2 $3 | sudo tee  /sys/class/leds/rgb:kbd_backlight/multi_intensity

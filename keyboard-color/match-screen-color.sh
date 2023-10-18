@@ -9,8 +9,9 @@ R=$(echo $RGB_COLOR | cut --delimiter=, -f1)
 G=$(echo $RGB_COLOR | cut --delimiter=, -f2)
 B=$(echo $RGB_COLOR | cut --delimiter=, -f3)
 
-R_HEX=$(printf '%X' $R)
-G_HEX=$(printf '%X' $G)
-B_HEX=$(printf '%X' $B)
+# R_HEX=$(printf '%X' $R)
+# G_HEX=$(printf '%X' $G)
+# B_HEX=$(printf '%X' $B)
 
-sudo ./set-keyboard-color.sh 0x$R_HEX$G_HEX$B_HEX
+sudo ./set-keyboard-color.sh $R $G $B
+
