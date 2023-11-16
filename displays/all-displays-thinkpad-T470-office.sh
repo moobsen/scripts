@@ -8,6 +8,6 @@ xrandr --output $MIDDLE --right-of eDP-1
 xrandr --output $RIGHT_ROTATED --right-of $MIDDLE
 xrandr --output $RIGHT_ROTATED --rotate left
 xrandr --output $MIDDLE --primary
-feh --bg-scale /home/mo/Pictures/fractal.png
+feh --bg-scale /home/mo/Pictures/solar_punk.jpg
 
 

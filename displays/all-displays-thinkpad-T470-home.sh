@@ -11,4 +11,4 @@ i3-msg 'rename workspace 2 to 4'
 i3-msg 'rename workspace 3 to 2'
 i3-msg 'rename workspace 1 to 3'
 i3-msg 'rename workspace 4 to 1'
-feh --bg-scale /home/mo/Pictures/fractal.png
+feh --bg-scale  /home/mo/Pictures/solar_punk.jpg
