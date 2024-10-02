@@ -33,7 +33,9 @@ then
     # change desktop backgroud
     feh --bg-center ./darkmode/img/bg_dark.png --image-bg "#002B36"
     # set background brightness to 0%
-    sudo brightnessctl s 20%
+    sudo brightnessctl s 10%
+    # set keyboard color to orange
+    ~/src/github/moobsen/scripts/keyboard-color/set-keyboard-color.sh 200 100 0
     gsettings set org.gnome.desktop.interface color-scheme prefer-dark
     echo true > $DARK_MODE_STATUS
 else
@@ -44,5 +46,6 @@ else
     sudo brightnessctl s 100%
     gsettings set org.gnome.desktop.interface color-scheme prefer-light
     echo false > $DARK_MODE_STATUS
+    ~/src/github/moobsen/scripts/keyboard-color/set-keyboard-color.sh 200 150 0
 fi
 

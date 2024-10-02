@@ -1,4 +1,5 @@
 #!/bin/bash
-xrandr --auto
-xrandr --output DisplayPort-1 --rotate left
-xrandr --output DisplayPort-1 --left-of DisplayPort-0
+wlr-randr --output DP-2 --transform 270
+wlr-randr --output DP-2 --pos 0,0
+wlr-randr --output DP-1 --pos 1200,0
+

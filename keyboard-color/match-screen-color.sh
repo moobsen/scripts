@@ -1,10 +1,10 @@
 #!/bin/bash
 BASEDIR=$(dirname "$0")
 cd $BASEDIR
-scrot -f screenshot.png
-RGB_COLOR=$(convert screenshot.png -resize 1x1\! \
+scrot -f ~/tmp/screenshot.png
+RGB_COLOR=$(convert ~/tmp/screenshot.png -resize 1x1\! \
 	-format "%[fx:int(255*r+.5)],%[fx:int(255*g+.5)],%[fx:int(255*b+.5)]" info:-)
-rm screenshot.png
+rm ~/tmp/screenshot.png
 R=$(echo $RGB_COLOR | cut --delimiter=, -f1)
 G=$(echo $RGB_COLOR | cut --delimiter=, -f2)
 B=$(echo $RGB_COLOR | cut --delimiter=, -f3)
