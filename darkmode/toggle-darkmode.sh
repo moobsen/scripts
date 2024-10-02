@@ -9,11 +9,25 @@ DARK_MODE_STATUS=$HOME/.config/dark_mode_status
 VS_CODE_CONFIG=$HOME/.config/Code/User/settings.json
 CODIUM_CONFIG=$HOME/.config/VSCodium/User/settings.json
 
+set_xfce4_terminal_solarized_light() {
+    xfconf-query -c xfce4-terminal -p /color-foreground -s "#073642"
+    xfconf-query -c xfce4-terminal -p /color-background -s "#fdf6e3"
+    xfconf-query -c xfce4-terminal -p /color-cursor     -s "#073642"
+    xfconf-query -c xfce4-terminal -p /color-bold       -s "#073642"
+}
+
+set_xfce4_terminal_solarized_dark() {
+    xfconf-query -c xfce4-terminal -p /color-foreground -s "#839496"
+    xfconf-query -c xfce4-terminal -p /color-background -s "#002b36"
+    xfconf-query -c xfce4-terminal -p /color-cursor     -s "#93a1a1"
+    xfconf-query -c xfce4-terminal -p /color-bold       -s "#93a1a1"
+}
+
 if [ `cat $DARK_MODE_STATUS` = false ]
 then
     #echo 'Turned on dark mode.'
     # terminal color
-    cp ./darkmode/settings/terminalrc.solarized-dark $HOME/.config/xfce4/terminal/terminalrc
+    set_xfce4_terminal_solarized_dark
     # vscode color
     jq '."workbench.colorTheme" |= "Solarized Dark"' $CODIUM_CONFIG > settings.tmp && mv settings.tmp $CODIUM_CONFIG
     # change desktop backgroud
@@ -24,7 +38,7 @@ then
     echo true > $DARK_MODE_STATUS
 else
     #echo 'Turned off dark mode.'
-    cp ./darkmode/settings/terminalrc.solarized-light $HOME/.config/xfce4/terminal/terminalrc
+    set_xfce4_terminal_solarized_light
     jq '."workbench.colorTheme" |= "Solarized Light"' $CODIUM_CONFIG > settings.tmp && mv settings.tmp $CODIUM_CONFIG
     feh --bg-center ./darkmode/img/bg_light.png --image-bg "#fdf6e3"
     sudo brightnessctl s 100%
