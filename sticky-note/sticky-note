@@ -1,0 +1,44 @@
+#!/usr/bin/env python3
+import sys
+from pathlib import Path
+from PyQt6.QtWidgets import QApplication, QSystemTrayIcon, QTextEdit
+from PyQt6.QtGui import QIcon, QPixmap, QColor
+from PyQt6.QtCore import QTimer
+
+NOTES = Path.home() / ".sticky-note.txt"
+
+class Note(QTextEdit):
+    def __init__(self):
+        super().__init__()
+        self.setWindowTitle("Note")
+        self.resize(320, 320)
+        if NOTES.exists():
+            self.setPlainText(NOTES.read_text())
+        self.timer = QTimer(self)
+        self.timer.setSingleShot(True)
+        self.timer.setInterval(500)
+        self.timer.timeout.connect(self.save)
+        self.textChanged.connect(self.timer.start)
+        self.setStyleSheet("QTextEdit { background: #fff7a8; color: #333333; border: none; }")
+
+    def save(self):
+        NOTES.write_text(self.toPlainText())
+
+    def closeEvent(self, event):  # X hides instead of quitting
+        self.save()
+        self.hide()
+        event.ignore()
+
+app = QApplication(sys.argv)
+app.setDesktopFileName("sticky-note")   # becomes the sway app_id
+app.setQuitOnLastWindowClosed(False)
+note = Note()
+
+pix = QPixmap(64, 64)
+pix.fill(QColor("#fff7a8"))
+tray = QSystemTrayIcon(QIcon(pix))
+tray.activated.connect(lambda reason: note.setVisible(not note.isVisible())
+                       if reason == QSystemTrayIcon.ActivationReason.Trigger else None)
+tray.show()
+sys.exit(app.exec())
+
