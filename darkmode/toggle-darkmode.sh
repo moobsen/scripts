@@ -8,18 +8,21 @@ cd $(git rev-parse --show-toplevel)
 DARK_MODE_STATUS=$HOME/.config/dark_mode_status
 VS_CODE_CONFIG=$HOME/.config/Code/User/settings.json
 CODIUM_CONFIG=$HOME/.config/VSCodium/User/settings.json
-
-set_foot_solarized_light() {
-    pkill -USR2 -x foot
-    pkill -USR2 -x footclient
-    printf '[main]\ninitial-color-theme=light\n' > $HOME/.config/foot/theme.ini
-}
+FOOT_CONFIG=$HOME/.config/foot/foot.ini
 
 set_foot_solarized_dark() {
     pkill -USR1 -x foot
     pkill -USR1 -x footclient
-    printf '[main]\ninitial-color-theme=dark\n' > $HOME/.config/foot/theme.ini
+    sed -i 's/^initial-color-theme=.*/initial-color-theme=1/' $FOOT_CONFIG
 }
+
+set_foot_solarized_light() {
+    pkill -USR2 -x foot
+    pkill -USR2 -x footclient
+    sed -i 's/^initial-color-theme=.*/initial-color-theme=2/' $FOOT_CONFIG
+}
+
+printf '[main]\ninitial-color-theme=1\n' > $HOME/.config/foot/theme.ini
 
 if [ `cat $DARK_MODE_STATUS` = false ]
 then
